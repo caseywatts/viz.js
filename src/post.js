@@ -1,3 +1,15 @@
+  function Viz(src) {
+    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var format = options.format === undefined ? "svg" : options.format;
+    var engine = options.engine === undefined ? "dot" : options.engine;
+  
+    if (format == "png-image-element") {
+      return Viz.svgXmlToPngImageElement(render(src, "svg", engine));
+    } else {
+      return render(src, format, engine);
+    }
+  }
+
   var graphviz;
   
   function render(src, format, engine) {
@@ -18,7 +30,7 @@
     return resultString;
   }
   
-  function svgXmlToPngImage(svgXml) {
+  Viz.svgXmlToPngImageElement = function(svgXml) {
     var svgImage = new Image();
     svgImage.src = "data:image/svg+xml;utf8," + svgXml;
 
@@ -36,18 +48,6 @@
     }
     
     return pngImage;
-  }
-  
-  function Viz(src) {
-    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-    var format = options.format === undefined ? "svg" : options.format;
-    var engine = options.engine === undefined ? "dot" : options.engine;
-    
-    if (format == "png-image-element") {
-      return svgXmlToPngImage(render(src, "svg", engine));
-    } else {
-      return render(src, format, engine);
-    }
   }
   
   if (typeof module === "object" && module.exports) {
