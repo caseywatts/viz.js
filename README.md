@@ -35,7 +35,7 @@ Viz.js provides the `"png-image-element"` format in addition to the regular Grap
     image = Viz("digraph g { a -> b; }", { format: "png-image-element" });
     document.body.appendChild(image);
 
-However, this won't work in a Web Worker context. In that case, ask for the `"svg"` format in the worker and convert using the accessory function `Viz.svgXmlToPngImageElement` in the window context, which converts SVG XML into a PNG image element. See tests/png.js for an example.
+However, this won't work in a Web Worker context. In that case, ask for the `"svg"` format in the worker and convert using the accessory function `Viz.svgXmlToPngImageElement` in the window context. See tests/png.js for an example.
 
 ### Supported Graphviz features
 
