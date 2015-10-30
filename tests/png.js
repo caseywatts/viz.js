@@ -1,6 +1,6 @@
 QUnit.module("png");
 
-QUnit.test("png format with a worker", function(assert) {
+QUnit.test("png-image-element format with a worker", function(assert) {
   var done = assert.async();
   
   var worker = new Worker("./worker.js");
@@ -16,4 +16,10 @@ QUnit.test("png format with a worker", function(assert) {
   }
   
   worker.postMessage({ src: "digraph { a -> b; }", options: { format: "svg" } });
+});
+
+QUnit.test("asking for plain png format should throw an exception", function(assert) {
+  assert.throws(function() {
+    Viz("digraph { a -> b; }", { format: "png" });
+  }, /renderer for png is unavailable/);
 });
